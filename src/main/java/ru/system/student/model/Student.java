@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student {
-  private Passport passport;
   private String phoneNumber;
   private String eMail;
   private String address;
