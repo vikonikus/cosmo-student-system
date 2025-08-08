@@ -13,12 +13,12 @@ import static ru.system.student.database.Database.STUDENTS;
 public class StudentServiceImpl implements StudentService {
 
   @Override
-  public Student getStudent(String seria, String number) {
+  public String getStudent(String seria, String number) {
     Passport passport = STUDENTS.keySet()
             .stream()
             .filter(student -> student.getSeria().equals(seria) && student.getNumber().equals(number))
             .findFirst().orElse(null);
-    return STUDENTS.get(passport);
+    return STUDENTS.get(passport).toString();
   }
 
   @Override

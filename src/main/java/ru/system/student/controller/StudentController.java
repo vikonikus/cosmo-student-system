@@ -11,7 +11,7 @@ public class StudentController {
 
   StudentService studentService = new StudentServiceImpl();
 
-  public Student getStudent(GetStudentDTO studentDTO) {
+  public String getStudent(GetStudentDTO studentDTO) {
     return studentService.getStudent(studentDTO.getSeria(), studentDTO.getNumber());
   }
 
