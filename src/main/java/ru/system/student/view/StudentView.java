@@ -9,6 +9,8 @@ import ru.system.student.model.Student;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import static ru.system.student.util.DateUtils.formatStringToDate;
+
 public class StudentView {
 
   private final static StudentController studentController = new StudentController();
@@ -37,9 +39,16 @@ public class StudentView {
         System.out.println("Студен успешно удален");
       } else {
         System.out.println("Ошибка при удалении студента! Перепроверте данные!");
+        runInterface();
       }
     } else if (choice == 3) {
-      // add student
+      boolean isSaved = saveStudent();
+      if (isSaved) {
+        System.out.println("Студен успешно создан");
+      } else {
+        System.out.println("Ошибка при создании студента! Перепроверте данные!");
+        runInterface();
+      }
     } else {
       System.out.println("Введите корректные данные!");
       runInterface();
@@ -64,7 +73,8 @@ public class StudentView {
     String lastName = scanner.nextLine();
     System.out.println("Введите дату рождения:");
     scanner = new Scanner(System.in);
-    LocalDate birthDate = scanner.nextLine();
+    String birthDate = scanner.nextLine();
+    LocalDate birthDateFormatted = formatStringToDate(birthDate);
     System.out.println("Введите место рождения:");
     scanner = new Scanner(System.in);
     String birthPlace = scanner.nextLine();
@@ -78,7 +88,7 @@ public class StudentView {
     scanner = new Scanner(System.in);
     String eMail = scanner.nextLine();
 
-    SaveStudentDTO saveStudentDTO = new SaveStudentDTO(name, lastName, seria, number, birthDate,
+    SaveStudentDTO saveStudentDTO = new SaveStudentDTO(name, lastName, seria, number, birthDateFormatted,
             birthPlace, faculty, phoneNumber, eMail, address);
     return studentController.saveStudent(saveStudentDTO);
   }
