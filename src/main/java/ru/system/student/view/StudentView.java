@@ -31,12 +31,18 @@ public class StudentView {
     }
 
     if (choice == 1) {
-      String value = getStudent();
-      System.out.println(value);
+      try {
+        String value = getStudent();
+        System.out.println(value);
+      } catch (NullPointerException exception) {
+        System.out.println("Студент не найден!");
+        runInterface();
+      }
     } else if (choice == 2) {
       boolean isDeleted = deleteStudent();
       if (isDeleted) {
         System.out.println("Студен успешно удален");
+        runInterface();
       } else {
         System.out.println("Ошибка при удалении студента! Перепроверте данные!");
         runInterface();
@@ -45,6 +51,7 @@ public class StudentView {
       boolean isSaved = saveStudent();
       if (isSaved) {
         System.out.println("Студен успешно создан");
+        runInterface();
       } else {
         System.out.println("Ошибка при создании студента! Перепроверте данные!");
         runInterface();
@@ -62,7 +69,7 @@ public class StudentView {
     System.out.println("Введите номер паспорта:");
     scanner = new Scanner(System.in);
     String number = scanner.nextLine();
-    System.out.println("Введите адресс:");
+    System.out.println("Введите адрес:");
     scanner = new Scanner(System.in);
     String address = scanner.nextLine();
     System.out.println("Введите имя:");

@@ -7,6 +7,6 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    implementation group: 'org.projectlombok', name: 'lombok', version: '1.18.38'
+    compileOnly("org.projectlombok:lombok:1.18.38")
+    annotationProcessor("org.projectlombok:lombok:1.18.38")
 }
