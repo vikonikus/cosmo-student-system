@@ -18,28 +18,33 @@ public class StudentServiceImpl implements StudentService {
             .stream()
             .filter(student -> student.getSeria().equals(seria) && student.getNumber().equals(number))
             .findFirst().orElse(null);
+    if (passport == null) {
+      return "Студента с подобными данными нет в системе!";
+    }
     return STUDENTS.get(passport).toString();
   }
 
   @Override
   public boolean deleteStudent(String seria, String number) {
-    STUDENTS.keySet()
+    Passport passport = STUDENTS.keySet()
             .stream()
             .filter(student -> student.getSeria().equals(seria) && student.getNumber().equals(number))
-            .forEach(STUDENTS::remove);
-    return true;
+            .findFirst()
+            .orElse(null);
+    if (passport == null) {
+      return false;
+    } else {
+      STUDENTS.remove(passport);
+      return true;
+    }
   }
 
   @Override
   public boolean saveStudent(String name, String lastName, String seria, String number,
-                             LocalDate birthDate, String birthPlace, String facultyName,
+                             LocalDate birthDate, String birthPlace, Faculty faculty,
                              String phoneNumber, String eMail, String address) {
     Passport passport = new Passport(name, lastName, birthDate, birthPlace, seria, number);
-    Faculty faculty = FACULTIES
-            .stream()
-            .filter(facValue -> facValue.getName().equals(facultyName))
-            .findFirst()
-            .orElse(null);
+
 
     Student student = new Student(phoneNumber, eMail, address, faculty);
     STUDENTS.put(passport, student);

@@ -34,6 +34,7 @@ public class StudentView {
       try {
         String value = getStudent();
         System.out.println(value);
+        runInterface();
       } catch (NullPointerException exception) {
         System.out.println("Студент не найден!");
         runInterface();
@@ -78,7 +79,7 @@ public class StudentView {
     System.out.println("Введите фамилию:");
     scanner = new Scanner(System.in);
     String lastName = scanner.nextLine();
-    System.out.println("Введите дату рождения:");
+    System.out.println("Введите дату рождения (в формате yyyy-mm-dd):");
     scanner = new Scanner(System.in);
     String birthDate = scanner.nextLine();
     LocalDate birthDateFormatted = formatStringToDate(birthDate);
